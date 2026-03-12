@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Kelurahan Rawajati</title>
+    <meta name="description" content="Data statistik dan informasi lengkap Kelurahan Rawajati. Penduduk, wilayah, fasilitas, dan potensi.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/images/logo-rawajati.svg" alt="Logo Kelurahan Rawajati" class="logo-img">
+                <span>Kelurahan Rawajati</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Pelayanan <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pelayanan-kependudukan.html">Kependudukan</a></li>
+                        <li><a href="pelayanan-pm1.html">Surat Keterangan</a></li>
+                        <li><a href="pelayanan-ahli-waris.html">Ahli Waris</a></li>
+                    </ul>
+                </li>
+                <li><a href="data.html" class="active">Data</a></li>
+                <li><a href="berita.html">Berita</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+            
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Beranda</a>
+                <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                <span class="current">Data Kelurahan</span>
+            </div>
+            <h1>Data Kelurahan Rawajati</h1>
+            <p>Statistik dan informasi lengkap tentang Kelurahan Rawajati</p>
+        </div>
+    </section>
+
+    <!-- Stats Overview -->
+    <section class="data-stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="data-stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">15.234</div>
+                        <div class="stat-label">Total Penduduk</div>
+                        <div class="stat-detail">
+                            <span><i class="fas fa-male"></i> 7.456 Laki-laki</span>
+                            <span><i class="fas fa-female"></i> 7.778 Perempuan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">4.567</div>
+                        <div class="stat-label">Kepala Keluarga</div>
+                        <div class="stat-detail">
+                            <span>Rata-rata 3-4 jiwa/KK</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Rukun Warga (RW)</div>
+                        <div class="stat-detail">
+                            <span>67 Rukun Tetangga (RT)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">127,5</div>
+                        <div class="stat-label">Luas Wilayah (Ha)</div>
+                        <div class="stat-detail">
+                            <span>Permukiman, fasilitas umum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Population Data -->
+    <section class="data-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Data Kependudukan</h2>
+                <p>Informasi lengkap tentang demografi dan distribusi penduduk</p>
+            </div>
+            
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Usia Produktif</h3>
+                    </div>
+                    <div class="data-card-body">
+                        <div class="progress-group">
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>0-14 tahun</span>
+                                    <span>18.5%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 18.5%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>15-64 tahun (Produktif)</span>
+                                    <span>68.2%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 68.2%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">
+                                    <span>65+ tahun</span>
+                                    <span>13.3%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 13.3%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <div class="data-card-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Tingkat Pendidikan</h3>
+                    </div>
+                    <div class="data-card-body">
+                        <div class="education-stats">
+                            <div class="edu-item">
+                                <div class="edu-icon"><i class="fas fa-school"></i></div>
+                                <div class="edu-content">
+                                    <div class="edu-label">SD/Sederajat</div>
+                                    <div class="edu-value">32.5%</div>
+                                </div>
+                            </div>
+                            <div class="edu-item">
+                                <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="edu-content">
+                                    <div class="edu-label">SMP/Sederajat</div>
+                                    <div class="edu-value">24.8%</div>
+                                </div>
+                            </div>
+                            <div class="edu-item">
+                                <div class="edu-icon"><i class="fas fa-university"></i></div>
+                                <div class="edu-content">
+                                    <div class="edu-label">SMA/Sederajat</div>
+                                    <div class="edu-value">28.3%</div>
+                                </div>
+                            </div>
+                            <div class="edu-item">
+                                <div class="edu-icon"><i class="fas fa-user-graduate"></i></div>
+                                <div class="edu-content">
+                                    <div class="edu-label">D3/S1/S2/S3</div>
+                                    <div class="edu-value">14.4%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <div class="data-card-header">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Mata Pencaharian</h3>
+                    </div>
+                    <div class="data-card-body">
+                        <div class="occupation-list">
+                            <div class="occupation-item">
+                                <span class="occupation-label">PNS/TNI/Polri</span>
+                                <span class="occupation-value">12.5%</span>
+                            </div>
+                            <div class="occupation-item">
+                                <span class="occupation-label">Wiraswasta/Entrepreneur</span>
+                                <span class="occupation-value">28.7%</span>
+                            </div>
+                            <div class="occupation-item">
+                                <span class="occupation-label">Karyawan Swasta</span>
+                                <span class="occupation-value">35.2%</span>
+                            </div>
+                            <div class="occupation-item">
+                                <span class="occupation-label">Buruh</span>
+                                <span class="occupation-value">8.9%</span>
+                            </div>
+                            <div class="occupation-item">
+                                <span class="occupation-label">Ibu Rumah Tangga</span>
+                                <span class="occupation-value">10.4%</span>
+                            </div>
+                            <div class="occupation-item">
+                                <span class="occupation-label">Lainnya</span>
+                                <span class="occupation-value">4.3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <div class="data-card-header">
+                        <i class="fas fa-mosque"></i>
+                        <h3>Agama</h3>
+                    </div>
+                    <div class="data-card-body">
+                        <div class="religion-list">
+                            <div class="religion-item">
+                                <span class="religion-label">Islam</span>
+                                <span class="religion-value">87.5%</span>
+                            </div>
+                            <div class="religion-item">
+                                <span class="religion-label">Kristen Protestan</span>
+                                <span class="religion-value">5.8%</span>
+                            </div>
+                            <div class="religion-item">
+                                <span class="religion-label">Katolik</span>
+                                <span class="religion-value">3.2%</span>
+                            </div>
+                            <div class="religion-item">
+                                <span class="religion-label">Hindu</span>
+                                <span class="religion-value">1.8%</span>
+                            </div>
+                            <div class="religion-item">
+                                <span class="religion-label">Buddha</span>
+                                <span class="religion-value">1.5%</span>
+                            </div>
+                            <div class="religion-item">
+                                <span class="religion-label">Konghucu</span>
+                                <span class="religion-value">0.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fasilitas Umum</h2>
+                <p>Sarana dan prasarana yang tersedia di Kelurahan Rawajati</p>
+            </div>
+            
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>Pendidikan</h3>
+                    <ul class="facility-list">
+                        <li>6 Taman Kanak-kanak (TK)</li>
+                        <li>4 Sekolah Dasar (SD)</li>
+                        <li>3 Sekolah Menengah Pertama (SMP)</li>
+                        <li>2 Sekolah Menengah Atas (SMA)</li>
+                        <li>1 Perguruan Tinggi</li>
+                    </ul>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3>Kesehatan</h3>
+                    <ul class="facility-list">
+                        <li>1 Puskesmas</li>
+                        <li>3 Puskesmas Pembantu</li>
+                        <li>5 Klinik Swasta</li>
+                        <li>8 Apotek</li>
+                        <li>2 Laboratorium Kesehatan</li>
+                    </ul>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>Ibadah</h3>
+                    <ul class="facility-list">
+                        <li>12 Masjid</li>
+                        <li>8 Musholla</li>
+                        <li>2 Gereja</li>
+                        <li>1 Pura</li>
+                        <li>1 Vihara</li>
+                    </ul>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Perdagangan</h3>
+                    <ul class="facility-list">
+                        <li>1 Pasar Tradisional</li>
+                        <li>2 Minimarket</li>
+                        <li>50+ Toko/Warung</li>
+                        <li>1 Pusat Perbelanjaan</li>
+                        <li>Pusat Kuliner</li>
+                    </ul>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>Rekreasi</h3>
+                    <ul class="facility-list">
+                        <li>3 Taman Kelurahan</li>
+                        <li>5 Lapangan Olahraga</li>
+                        <li>2 Area Jogging</li>
+                        <li>1 Kolam Renang</li>
+                        <li>Area Bermain Anak</li>
+                    </ul>
+                </div>
+                
+                <div class="facility-card">
+                    <div class="facility-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Keamanan</h3>
+                    <ul class="facility-list">
+                        <li>1 Kantor Polisi Sektor</li>
+                        <li>6 Pos Kamling</li>
+                        <li>1 Pemadam Kebakaran</li>
+                        <li>Sistem CCTV</li>
+                        <li>Tim Siaga Bencana</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Economic Potential -->
+    <section class="economic-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Potensi Ekonomi</h2>
+                <p>Sektor ekonomi dan peluang usaha di Kelurahan Rawajati</p>
+            </div>
+            
+            <div class="economic-grid">
+                <div class="economic-card">
+                    <div class="economic-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>UMKM</h3>
+                    <p>Lebih dari 200 UMKM aktif di berbagai sektor kuliner, fashion, dan jasa</p>
+                    <div class="economic-stats">
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">200+</span>
+                            <span class="stat-mini-label">UMKM Terdaftar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="economic-card">
+                    <div class="economic-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Kuliner</h3>
+                    <p>Pusat kuliner dengan beragam makanan khas Jakarta dan nusantara</p>
+                    <div class="economic-stats">
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">50+</span>
+                            <span class="stat-mini-label">Pelaku Usaha</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="economic-card">
+                    <div class="economic-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Fashion</h3>
+                    <p>Industri konveksi dan butik fashion lokal yang berkembang</p>
+                    <div class="economic-stats">
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">30+</span>
+                            <span class="stat-mini-label">Brand Lokal</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="economic-card">
+                    <div class="economic-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Digital</h3>
+                    <p>Startup dan pelaku ekonomi digital yang terus bertumbuh</p>
+                    <div class="economic-stats">
+                        <div class="stat-mini">
+                            <span class="stat-mini-value">15+</span>
+                            <span class="stat-mini-label">Startup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unduh Data</h2>
+                <p>Dokumen dan publikasi data Kelurahan Rawajati</p>
+            </div>
+            
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="download-content">
+                        <h4>Profil Kelurahan 2026</h4>
+                        <p>Dokumen profil lengkap Kelurahan Rawajati</p>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-download"></i> Unduh PDF
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="download-content">
+                        <h4>Data Penduduk 2026</h4>
+                        <p>Statistik kependudukan per RW/RT</p>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-download"></i> Unduh Excel
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="download-content">
+                        <h4>Laporan Tahunan 2025</h4>
+                        <p>Laporan pelaksanaan pembangunan</p>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-download"></i> Unduh PDF
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <div class="download-content">
+                        <h4>Peta Wilayah</h4>
+                        <p>Peta administrasi Kelurahan Rawajati</p>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-download"></i> Unduh PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Butuh Informasi Lebih Lanjut?</h2>
+                <p>Hubungi kami untuk mendapatkan data dan informasi lebih detail tentang Kelurahan Rawajati.</p>
+                <div class="cta-buttons">
+                    <a href="kontak.html" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Hubungi Kami
+                    </a>
+                    <a href="https://wa.me/6281234567890" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Emblem_of_Jakarta.svg" alt="Logo Jakarta">
+                        <div>
+                            <h3>Kelurahan Rawajati</h3>
+                            <p>Kecamatan Pancoran, Jakarta Selatan</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Melayani masyarakat dengan sepenuh hati untuk Rawajati yang lebih maju dan sejahtera.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/kelurahan_rawajati" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Link Cepat</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="pelayanan-kependudukan.html">Pelayanan</a></li>
+                        <li><a href="data.html">Data Kelurahan</a></li>
+                        <li><a href="berita.html">Berita</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Pelayanan</h4>
+                    <ul>
+                        <li><a href="pelayanan-kependudukan.html">Kependudukan</a></li>
+                        <li><a href="pelayanan-pm1.html">Surat Keterangan</a></li>
+                        <li><a href="pelayanan-ahli-waris.html">Ahli Waris</a></li>
+                        <li><a href="#">Pengaduan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Kontak Kami</h4>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Rawajati Barat RT.006 RW.04, Jakarta Selatan 12750</li>
+                        <li><i class="fas fa-phone"></i> (021) 7996204</li>
+                        <li><i class="fab fa-whatsapp"></i> +62 812-3456-7890</li>
+                        <li><i class="fas fa-envelope"></i> kelurahan@rawajati.jakarta.go.id</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 Kelurahan Rawajati. All rights reserved.</p>
+                    <div class="footer-credits">
+                        <span>Created by <a href="https://deerflow.tech" target="_blank">Deerflow</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbot-window">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <span>Rawajati AI</span>
+            </div>
+            <button class="chatbot-close" id="chatbot-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Halo! Saya Rawajati AI. Ada yang bisa saya bantu?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Ketik pertanyaan Anda...">
+            <button id="chatbot-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

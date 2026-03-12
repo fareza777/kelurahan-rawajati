@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pelayanan Surat Ahli Waris - Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan">
+    <title>Surat Ahli Waris - Kelurahan Rawajati</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+            padding: 140px 0 80px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920') center/cover;
+            opacity: 0.1;
+        }
+        
+        .page-header h1 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 16px;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .breadcrumb a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--accent-tosca);
+        }
+        
+        .service-detail {
+            padding: 80px 0;
+            background: var(--off-white);
+        }
+        
+        .service-intro {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-intro h2 {
+            font-size: 28px;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+        
+        .service-intro p {
+            font-size: 15px;
+            color: var(--gray-700);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .requirements-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+        
+        .requirement-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .requirement-card h3 {
+            font-size: 22px;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .checklist {
+            background: var(--gray-100);
+            padding: 24px;
+            border-radius: var(--border-radius);
+        }
+        
+        .checklist-items {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist-items li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: var(--gray-700);
+            padding: 12px;
+            background: var(--white);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .checklist-items li:hover {
+            background: rgba(227, 6, 19, 0.05);
+            transform: translateX(4px);
+        }
+        
+        .checklist-items li i {
+            color: var(--accent-tosca);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .steps-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-item::after {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 56px;
+            bottom: -32px;
+            width: 2px;
+            background: var(--gray-200);
+        }
+        
+        .step-item:last-child::after {
+            display: none;
+        }
+        
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-tosca), var(--accent-tosca-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+        
+        .step-content h4 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+        
+        .step-content p {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(0, 166, 81, 0.1), rgba(0, 166, 81, 0.05));
+            border: 2px solid var(--accent-tosca);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            margin: 60px auto 0;
+            max-width: 900px;
+        }
+        
+        .info-box h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--accent-tosca-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .info-box p {
+            font-size: 15px;
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 24px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--gray-800);
+        }
+        
+        .info-item i {
+            color: var(--primary-red);
+            font-size: 20px;
+        }
+        
+        .note-box {
+            background: linear-gradient(135deg, rgba(227, 6, 19, 0.1), rgba(227, 6, 19, 0.05));
+            border: 2px solid var(--primary-red);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            margin-top: 24px;
+        }
+        
+        .note-box p {
+            font-size: 14px;
+            color: var(--gray-800);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .note-box strong {
+            color: var(--primary-red);
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-item {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .step-item::after {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Emblem_of_Jakarta.svg" alt="Logo Jakarta" class="logo-emblem">
+                <div class="logo-text">
+                    <span class="logo-title">KELURAHAN RAWAJATI</span>
+                    <span class="logo-subtitle">Kecamatan Pancoran, Jakarta Selatan</span>
+                </div>
+            </a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+                <li class="nav-item nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle active">Pelayanan <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pelayanan-kependudukan.html">Kependudukan</a></li>
+                        <li><a href="pelayanan-pm1.html">PM1 (Surat Keterangan)</a></li>
+                        <li><a href="pelayanan-ahli-waris.html" class="active">Surat Ahli Waris</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="profil.html" class="nav-link">Profil</a></li>
+                <li class="nav-item"><a href="data.html" class="nav-link">Data</a></li>
+                <li class="nav-item"><a href="kesiapsiagaan.html" class="nav-link">Kesiapsiagaan</a></li>
+                <li class="nav-item"><a href="struktur.html" class="nav-link">Struktur</a></li>
+                <li class="nav-item"><a href="berita.html" class="nav-link">Berita</a></li>
+                <li class="nav-item"><a href="kontak.html" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Surat Pernyataan & Keterangan Ahli Waris</h1>
+        <div class="breadcrumb">
+            <a href="index.html">Beranda</a>
+            <span>/</span>
+            <a href="#">Pelayanan</a>
+            <span>/</span>
+            <span>Surat Ahli Waris</span>
+        </div>
+    </section>
+
+    <!-- Service Detail -->
+    <section class="service-detail">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Layanan Administras</span>
+                <h2 class="section-title">Surat Ahli Waris</h2>
+                <p class="section-subtitle">Pelayanan pembuatan surat pernyataan dan keterangan ahli waris</p>
+            </div>
+            
+            <!-- Service Intro -->
+            <div class="service-intro">
+                <h2><i class="fas fa-users"></i> Apa itu Surat Ahli Waris?</h2>
+                <p>Surat Pernyataan dan Keterangan Ahli Waris adalah dokumen resmi yang diterbitkan oleh Kelurahan yang menyatakan siapa saja yang berhak menjadi ahli waris dari seseorang yang telah meninggal dunia.</p>
+                <p>Surat ini diperlukan untuk berbagai keperluan, seperti pengurusan warisan, pencairan asuransi, pensiun, pengambilan uang di bank, balik nama sertifikat tanah, dan keperluan hukum lainnya.</p>
+                <p>Penting: Surat Ahli Waris dari Kelurahan merupakan langkah awal. Untuk harta warisan tertentu (seperti tanah/sertifikat), mungkin memerlukan Surat Keterangan Waris dari Notaris atau Pengadilan.</p>
+            </div>
+            
+            <!-- Requirements -->
+            <div class="requirements-section">
+                <div class="section-header">
+                    <h2 class="section-title">Persyaratan Pengajuan</h2>
+                    <p class="section-subtitle">Dokumen yang perlu disiapkan untuk pengurusan Surat Ahli Waris</p>
+                </div>
+                
+                <!-- Requirement Card 1 -->
+                <div class="requirement-card">
+                    <h3><i class="fas fa-file-alt"></i> Dokumen Dasar</h3>
+                    <div class="checklist">
+                        <ul class="checklist-items">
+                            <li><i class="fas fa-check-circle"></i> Surat Pengantar dari RT/RW setempat</li>
+                            <li><i class="fas fa-check-circle"></i> Fotokopi KTP semua ahli waris (yang masih hidup)</li>
+                            <li><i class="fas fa-check-circle"></i> Fotokopi Kartu Keluarga (KK) almarhum/almarhumah</li>
+                            <li><i class="fas fa-check-circle"></i> Fotokopi KTP dan KK almarhum/almarhumah</li>
+                            <li><i class="fas fa-check-circle"></i> Surat Kematian dari Kelurahan/Dinas Kependudukan</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Requirement Card 2 -->
+                <div class="requirement-card">
+                    <h3><i class="fas fa-book"></i> Dokumen Tambahan</h3>
+                    <div class="checklist">
+                        <ul class="checklist-items">
+                            <li><i class="fas fa-check-circle"></i> Fotokopi Akta Nikah/Buku Nikah almarhum/almarhumah</li>
+                            <li><i class="fas fa-check-circle"></i> Fotokopi Akta Kelahiran semua ahli waris</li>
+                            <li><i class="fas fa-check-circle"></i> Surat Pernyataan dari semua ahli waris (jika ada)</li>
+                            <li><i class="fas fa-check-circle"></i> Fotokopi dokumen harta warisan (jika diperlukan)</li>
+                            <li><i class="fas fa-check-circle"></i> Pas foto 3x4 almarhum/almarhumah (2 lembar)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Requirement Card 3 -->
+                <div class="requirement-card">
+                    <h3><i class="fas fa-user-friends"></i> Kehadiran Ahli Waris</h3>
+                    <div class="checklist">
+                        <ul class="checklist-items">
+                            <li><i class="fas fa-check-circle"></i> Semua ahli waris yang ada harus hadir saat pengurusan</li>
+                            <li><i class="fas fa-check-circle"></i> Jika tidak bisa hadir, harus ada surat kuasa yang dilegalisir</li>
+                            <li><i class="fas fa-check-circle"></i> Membawa dokumen asli untuk verifikasi</li>
+                            <li><i class="fas fa-check-circle"></i> Mengisi formulir permohonan yang disediakan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Steps -->
+            <div class="steps-section">
+                <div class="steps-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Alur Pelayanan</h2>
+                        <p class="section-subtitle">Langkah-langkah pengurusan Surat Ahli Waris</p>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Urus Surat Pengantar RT/RW</h4>
+                            <p>Datang ke RT/RW tempat almarhum/almarhumah berdomisili untuk mendapatkan surat pengantar permohonan Surat Ahli Waris. Pastikan semua ahli waris sudah diketahui oleh pengurus RT/RW.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Siapkan Semua Dokumen</h4>
+                            <p>Kumpulkan semua dokumen persyaratan (asli dan fotokopi). Pastikan fotokopi jelas dan terbaca. Dokumentasi lengkap akan mempercepat proses verifikasi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Datang ke Kantor Kelurahan</h4>
+                            <p>Semua ahli waris datang ke Kantor Kelurahan Rawajati pada jam operasional. Bawa semua dokumen asli dan fotokopi. Ambil nomor antrian di loket pelayanan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Verifikasi Berkas oleh Petugas</h4>
+                            <p>Serahkan berkas kepada petugas. Petugas akan memverifikasi kelengkapan dan keabsahan dokumen. Jika ada kekurangan, akan diberitahu untuk dilengkapi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Pemeriksaan dan Tanda Tangan</h4>
+                            <p>Petugas akan memeriksa silsilah keluarga dan memastikan semua ahli waris sudah hadir. Semua ahli waris akan menandatangani surat pernyataan di hadapan petugas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Penerbitan Surat</h4>
+                            <p>Setelah semua proses selesai, Surat Pernyataan dan Keterangan Ahli Waris akan diterbitkan dan ditandatangani oleh Lurah. Surat dapat diambil pada hari yang sama atau 1-2 hari kerja.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Box -->
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Informasi Penting</h3>
+                    <p><strong>Pelayanan GRATIS!</strong> Pengurusan Surat Ahli Waris di Kelurahan Rawajati tidak dipungut biaya apapun. Hati-hati terhadap oknum yang meminta imbalan.</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Waktu Proses: 1-3 hari kerja (setelah berkas lengkap)</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Jam Operasional: Senin-Kamis 07.00-16.00 WIB, Jumat 07.00-11.30 WIB</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Kontak: (021) 7996204 / WA: +62 812-3456-7890</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Lokasi: Jl. Rawajati Barat RT.006 RW.04, Pancoran, Jaksel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <p><strong>Catatan:</strong> Untuk harta warisan berupa tanah/sertifikat, kendaraan bermotor, atau jumlah tertentu di bank, Surat Keterangan Ahli Waris dari Kelurahan mungkin perlu dilengkapi dengan Surat Keterangan Waris dari Notaris atau Pengadilan Negeri.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="footer-logo">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Emblem_of_Jakarta.svg" alt="Logo Jakarta">
+                            <div class="footer-logo-text">
+                                <h3>KELURAHAN RAWAJATI</h3>
+                                <p>Kecamatan Pancoran, Jakarta Selatan</p>
+                            </div>
+                        </div>
+                        <p class="footer-desc">
+                            Melayani masyarakat dengan hati untuk mewujudkan Rawajati yang maju, sejahtera, dan berkarakter.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://instagram.com/kelurahan_rawajati" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Link Cepat</h4>
+                        <ul class="footer-links">
+                            <li><a href="profil.html">Profil Kelurahan</a></li>
+                            <li><a href="pelayanan-kependudukan.html">Layanan Kependudukan</a></li>
+                            <li><a href="pelayanan-pm1.html">Surat Keterangan PM1</a></li>
+                            <li><a href="data.html">Data Kelurahan</a></li>
+                            <li><a href="berita.html">Berita & Kegiatan</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Layanan</h4>
+                        <ul class="footer-links">
+                            <li><a href="pelayanan-kependudukan.html">KTP & Kartu Keluarga</a></li>
+                            <li><a href="pelayanan-pm1.html">Surat Domisili</a></li>
+                            <li><a href="pelayanan-ahli-waris.html">Surat Ahli Waris</a></li>
+                            <li><a href="kesiapsiagaan.html">Kesiapsiagaan Bencana</a></li>
+                            <li><a href="kontak.html">Pengaduan Masyarakat</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Kontak Kami</h4>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jl. Rawajati Barat RT.006 RW.04, Pancoran, Jakarta Selatan 12750</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>(021) 7996204</span>
+                            </li>
+                            <li>
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+62 812-3456-7890</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>kelurahan@rawajati.jakarta.go.id</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan. All rights reserved.</p>
+                    <div class="footer-credits">
+                        <span>Created by <a href="https://deerflow.tech" target="_blank" class="deerflow-link">Deerflow</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

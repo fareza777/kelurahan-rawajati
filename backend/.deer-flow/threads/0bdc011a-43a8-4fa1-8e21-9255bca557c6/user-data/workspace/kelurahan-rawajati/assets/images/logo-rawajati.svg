@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E30613;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c40510;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="toscaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00A651;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#008a43;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#redGradient)" stroke="#FFD700" stroke-width="4"/>
+  
+  <!-- Outer Ring -->
+  <circle cx="200" cy="200" r="175" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Jakarta Monas Stylized -->
+  <g transform="translate(200, 220)">
+    <!-- Monas Base -->
+    <path d="M -60 80 L -50 40 L 50 40 L 60 80 Z" fill="url(#goldGradient)"/>
+    <!-- Monas Body -->
+    <rect x="-25" y="-60" width="50" height="100" fill="url(#goldGradient)"/>
+    <!-- Monas Flame -->
+    <path d="M 0 -90 C -15 -70, -10 -50, 0 -60 C 10 -50, 15 -70, 0 -90 Z" fill="#E30613"/>
+    <circle cx="0" cy="-95" r="8" fill="#FFD700"/>
+  </g>
+  
+  <!-- Shield Shape (representing protection/service) -->
+  <path d="M 200 60 L 260 100 L 260 170 C 260 220, 200 260, 200 260 C 200 260, 140 220, 140 170 L 140 100 Z" 
+        fill="url(#toscaGradient)" 
+        stroke="#FFD700" 
+        stroke-width="2"/>
+  
+  <!-- Star (representing excellence) -->
+  <polygon points="200,130 210,155 238,155 215,172 224,198 200,182 176,198 185,172 162,155 190,155" 
+           fill="#FFD700"/>
+  
+  <!-- Rice and Cotton (prosperity symbols) -->
+  <g transform="translate(200, 230)">
+    <!-- Rice grains (17 grains for August 17) -->
+    <g fill="#FFD700">
+      <ellipse cx="-45" cy="0" rx="3" ry="8" transform="rotate(-30 -45 0)"/>
+      <ellipse cx="-35" cy="-5" rx="3" ry="8" transform="rotate(-20 -35 -5)"/>
+      <ellipse cx="-25" cy="-8" rx="3" ry="8" transform="rotate(-10 -25 -8)"/>
+      <ellipse cx="-15" cy="-10" rx="3" ry="8"/>
+      <ellipse cx="0" cy="-10" rx="3" ry="8"/>
+      <ellipse cx="15" cy="-10" rx="3" ry="8"/>
+      <ellipse cx="25" cy="-8" rx="3" ry="8" transform="rotate(10 25 -8)"/>
+      <ellipse cx="35" cy="-5" rx="3" ry="8" transform="rotate(20 35 -5)"/>
+      <ellipse cx="45" cy="0" rx="3" ry="8" transform="rotate(30 45 0)"/>
+    </g>
+  </g>
+  
+  <!-- Text -->
+  <text x="200" y="320" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">RAWAJATI</text>
+  
+  <!-- Jakarta Charter Text -->
+  <text x="200" y="345" font-family="Arial, sans-serif" font-size="10" fill="#FFD700" text-anchor="middle" letter-spacing="1">KELURAHAN • JAKARTA SELATAN</text>
+</svg>
