@@ -3,6 +3,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.config.app_config import get_app_config
 from src.gateway.config import get_gateway_config
@@ -146,7 +147,14 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
         ],
     )
 
-    # CORS is handled by nginx - no need for FastAPI middleware
+    # CORS middleware for development (when nginx is not used)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # Include routers
     # Models API is mounted at /api/models

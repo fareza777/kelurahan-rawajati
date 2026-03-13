@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import mimetypes
+import os
 from collections.abc import Mapping
 from typing import Any
 
@@ -152,7 +153,7 @@ def _resolve_attachments(thread_id: str, artifacts: list[str]) -> list[ResolvedA
 
     attachments: list[ResolvedAttachment] = []
     paths = get_paths()
-    outputs_dir = paths.sandbox_outputs_dir(thread_id).resolve()
+    outputs_dir = paths.sandbox_outputs_dir(thread_id)
     for virtual_path in artifacts:
         # Security: only allow files from the agent outputs directory
         if not virtual_path.startswith(_OUTPUTS_VIRTUAL_PREFIX):
@@ -162,9 +163,10 @@ def _resolve_attachments(thread_id: str, artifacts: list[str]) -> list[ResolvedA
             actual = paths.resolve_virtual_path(thread_id, virtual_path)
             # Verify the resolved path is actually under the outputs directory
             # (guards against path-traversal even after prefix check)
-            try:
-                actual.resolve().relative_to(outputs_dir)
-            except ValueError:
+            # Use string comparison instead of resolve() which triggers getcwd
+            actual_str = os.path.normpath(str(actual))
+            outputs_str = os.path.normpath(str(outputs_dir))
+            if not actual_str.startswith(outputs_str + os.sep) and actual_str != outputs_str:
                 logger.warning("[Manager] artifact path escapes outputs dir: %s -> %s", virtual_path, actual)
                 continue
             if not actual.is_file():

@@ -53,14 +53,16 @@ class LocalSandbox(Sandbox):
         Returns:
             Container path if mapping exists, otherwise original path
         """
-        path_str = str(Path(path).resolve())
+        # Don't use resolve() - it triggers getcwd()
+        # Use normpath for normalization instead
+        path_str = os.path.normpath(str(path))
 
         # Try each mapping (longest local path first for more specific matches)
         for container_path, local_path in sorted(self.path_mappings.items(), key=lambda x: len(x[1]), reverse=True):
-            local_path_resolved = str(Path(local_path).resolve())
+            local_path_resolved = os.path.normpath(str(local_path))
             if path_str.startswith(local_path_resolved):
                 # Replace the local path prefix with container path
-                relative = path_str[len(local_path_resolved) :].lstrip("/")
+                relative = path_str[len(local_path_resolved) :].lstrip("/\\")
                 resolved = f"{container_path}/{relative}" if relative else container_path
                 return resolved
 
@@ -89,7 +91,8 @@ class LocalSandbox(Sandbox):
         # Match paths like /Users/... or other absolute paths
         result = output
         for container_path, local_path in sorted_mappings:
-            local_path_resolved = str(Path(local_path).resolve())
+            # Don't use resolve() - use normpath instead
+            local_path_resolved = os.path.normpath(str(local_path))
             # Escape the local path for use in regex
             escaped_local = re.escape(local_path_resolved)
             # Match the local path followed by optional path components
@@ -134,13 +137,19 @@ class LocalSandbox(Sandbox):
         return pattern.sub(replace_match, command)
 
     @staticmethod
-    def _get_shell() -> str:
+    def _get_shell() -> str | None:
         """Detect available shell executable with fallback.
 
         Returns the first available shell in order of preference:
         /bin/zsh → /bin/bash → /bin/sh → first `sh` found on PATH.
+        On Windows, returns None to use the default shell (handles paths with spaces).
         Raises a RuntimeError if no suitable shell is found.
         """
+        # On Windows, use default shell to avoid issues with paths containing spaces
+        # (e.g., "C:\Program Files\Git\usr\bin\sh.EXE")
+        if os.name == "nt":
+            return None
+
         for shell in ("/bin/zsh", "/bin/bash", "/bin/sh"):
             if os.path.isfile(shell) and os.access(shell, os.X_OK):
                 return shell

@@ -139,7 +139,11 @@ async def update_mcp_configuration(request: McpConfigUpdateRequest) -> McpConfig
 
         # If no config file exists, create one in the parent directory (project root)
         if config_path is None:
-            config_path = Path.cwd().parent / "extensions_config.json"
+            # Use __file__ based path instead of Path.cwd() which triggers getcwd
+            # This file is at backend/src/gateway/routers/mcp.py
+            # Project root is 5 levels up
+            project_root = Path(__file__).parent.parent.parent.parent.parent
+            config_path = project_root / "extensions_config.json"
             logger.info(f"No existing extensions config found. Creating new config at: {config_path}")
 
         # Load current config to preserve skills configuration

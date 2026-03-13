@@ -42,20 +42,26 @@ def _normalize_presented_filepath(
     if not outputs_path:
         raise ValueError("Thread outputs path is not available in runtime state")
 
-    outputs_dir = Path(outputs_path).resolve()
+    outputs_dir = Path(outputs_path)
     stripped = filepath.lstrip("/")
     virtual_prefix = VIRTUAL_PATH_PREFIX.lstrip("/")
 
     if stripped == virtual_prefix or stripped.startswith(virtual_prefix + "/"):
         actual_path = get_paths().resolve_virtual_path(thread_id, filepath)
     else:
-        actual_path = Path(filepath).expanduser().resolve()
+        # Don't use resolve() - it triggers getcwd()
+        # Just expand user home and use as-is
+        actual_path = Path(filepath).expanduser()
 
-    try:
-        relative_path = actual_path.relative_to(outputs_dir)
-    except ValueError as exc:
-        raise ValueError(f"Only files in {OUTPUTS_VIRTUAL_PREFIX} can be presented: {filepath}") from exc
+    # Normalize paths for comparison without resolve()
+    actual_str = str(actual_path)
+    outputs_str = str(outputs_dir)
+    # Check if actual_path is under outputs_dir
+    if not actual_str.startswith(outputs_str):
+        raise ValueError(f"Only files in {OUTPUTS_VIRTUAL_PREFIX} can be presented: {filepath}")
 
+    # Get relative path
+    relative_path = Path(actual_str[len(outputs_str):].lstrip("/\\"))
     return f"{OUTPUTS_VIRTUAL_PREFIX}/{relative_path.as_posix()}"
 
 

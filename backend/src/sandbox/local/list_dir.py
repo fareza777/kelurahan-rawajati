@@ -1,4 +1,5 @@
 import fnmatch
+import os
 from pathlib import Path
 
 IGNORE_PATTERNS = [
@@ -83,7 +84,9 @@ def list_dir(path: str, max_depth: int = 2) -> list[str]:
         excluding items matching IGNORE_PATTERNS.
     """
     result: list[str] = []
-    root_path = Path(path).resolve()
+    # Don't use resolve() - it triggers getcwd()
+    # Use normpath for normalization instead
+    root_path = Path(os.path.normpath(path))
 
     if not root_path.is_dir():
         return result
@@ -99,7 +102,8 @@ def list_dir(path: str, max_depth: int = 2) -> list[str]:
                     continue
 
                 post_fix = "/" if item.is_dir() else ""
-                result.append(str(item.resolve()) + post_fix)
+                # Don't use resolve() - just convert to string
+                result.append(str(item) + post_fix)
 
                 # Recurse into subdirectories if not at max depth
                 if item.is_dir() and current_depth < max_depth:

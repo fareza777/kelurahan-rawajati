@@ -217,9 +217,11 @@ async def delete_uploaded_file(thread_id: str, filename: str) -> dict:
         raise HTTPException(status_code=404, detail=f"File not found: {filename}")
 
     # Security check: ensure the path is within the uploads directory
-    try:
-        file_path.resolve().relative_to(uploads_dir.resolve())
-    except ValueError:
+    # Use string comparison instead of resolve() which triggers getcwd
+    import os
+    file_str = os.path.normpath(str(file_path))
+    uploads_str = os.path.normpath(str(uploads_dir))
+    if not file_str.startswith(uploads_str + os.sep) and file_str != uploads_str:
         raise HTTPException(status_code=403, detail="Access denied")
 
     try:

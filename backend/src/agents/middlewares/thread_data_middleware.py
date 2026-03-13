@@ -2,6 +2,7 @@ from typing import NotRequired, override
 
 from langchain.agents import AgentState
 from langchain.agents.middleware import AgentMiddleware
+from langgraph.config import get_config
 from langgraph.runtime import Runtime
 
 from src.agents.thread_state import ThreadDataState
@@ -71,9 +72,20 @@ class ThreadDataMiddleware(AgentMiddleware[ThreadDataMiddlewareState]):
 
     @override
     def before_agent(self, state: ThreadDataMiddlewareState, runtime: Runtime) -> dict | None:
-        thread_id = runtime.context.get("thread_id")
+        # Get thread_id from config (set by LangGraph server) or use default
+        try:
+            config = get_config()
+            thread_id = config.get("configurable", {}).get("thread_id")
+        except Exception:
+            thread_id = None
+
         if thread_id is None:
-            raise ValueError("Thread ID is required in the context")
+            # Fallback: try runtime.context (for custom invocations with context)
+            thread_id = runtime.context.get("thread_id") if runtime.context else None
+
+        if thread_id is None:
+            # Use a default thread ID for direct invocations
+            thread_id = "default"
 
         if self._lazy_init:
             # Lazy initialization: only compute paths, don't create directories

@@ -94,22 +94,28 @@ class ExtensionsConfig(BaseModel):
                 raise FileNotFoundError(f"Extensions config file specified by environment variable `DEER_FLOW_EXTENSIONS_CONFIG_PATH` not found at {path}")
             return path
         else:
-            # Check if the extensions_config.json is in the current directory
-            path = Path(os.getcwd()) / "extensions_config.json"
+            # Use __file__ based path instead of os.getcwd() which triggers blocking call
+            # This file is at backend/src/config/extensions_config.py
+            # Project root is 4 levels up: backend/src/config -> backend/src -> backend -> project_root
+            project_root = Path(__file__).parent.parent.parent.parent
+
+            # Check if the extensions_config.json is in the project root
+            path = project_root / "extensions_config.json"
             if path.exists():
                 return path
 
-            # Check if the extensions_config.json is in the parent directory of CWD
-            path = Path(os.getcwd()).parent / "extensions_config.json"
+            # Check if the extensions_config.json is in the backend directory
+            backend_dir = project_root / "backend"
+            path = backend_dir / "extensions_config.json"
             if path.exists():
                 return path
 
             # Backward compatibility: check for mcp_config.json
-            path = Path(os.getcwd()) / "mcp_config.json"
+            path = project_root / "mcp_config.json"
             if path.exists():
                 return path
 
-            path = Path(os.getcwd()).parent / "mcp_config.json"
+            path = backend_dir / "mcp_config.json"
             if path.exists():
                 return path
 

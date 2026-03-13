@@ -52,13 +52,22 @@ class AppConfig(BaseModel):
                 raise FileNotFoundError(f"Config file specified by environment variable `DEER_FLOW_CONFIG_PATH` not found at {path}")
             return path
         else:
-            # Check if the config.yaml is in the current directory
-            path = Path(os.getcwd()) / "config.yaml"
+            # Use __file__ based path instead of os.getcwd() which triggers blocking call
+            # This file is at backend/src/config/app_config.py
+            # Project root is 4 levels up: backend/src/config -> backend/src -> backend -> project_root
+            project_root = Path(__file__).parent.parent.parent.parent
+
+            # Check if the config.yaml is in the project root
+            path = project_root / "config.yaml"
+            if path.exists():
+                return path
+
+            # Check if the config.yaml is in the backend directory
+            backend_dir = project_root / "backend"
+            path = backend_dir / "config.yaml"
             if not path.exists():
-                # Check if the config.yaml is in the parent directory of CWD
-                path = Path(os.getcwd()).parent / "config.yaml"
-                if not path.exists():
-                    raise FileNotFoundError("`config.yaml` file not found at the current directory nor its parent directory")
+                raise FileNotFoundError("`config.yaml` file not found in project root or backend directory")
+
             return path
 
     @classmethod

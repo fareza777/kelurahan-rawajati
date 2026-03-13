@@ -1,4 +1,5 @@
 import json
+import os
 
 from langchain.tools import tool
 from tavily import TavilyClient
@@ -11,6 +12,9 @@ def _get_tavily_client() -> TavilyClient:
     api_key = None
     if config is not None and "api_key" in config.model_extra:
         api_key = config.model_extra.get("api_key")
+    # Fallback to environment variable
+    if not api_key:
+        api_key = os.environ.get("TAVILY_API_KEY")
     return TavilyClient(api_key=api_key)
 
 

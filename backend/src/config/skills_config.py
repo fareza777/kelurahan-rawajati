@@ -26,9 +26,11 @@ class SkillsConfig(BaseModel):
             # Use configured path (can be absolute or relative)
             path = Path(self.path)
             if not path.is_absolute():
-                # If relative, resolve from current working directory
-                path = Path.cwd() / path
-            return path.resolve()
+                # If relative, resolve from backend directory (avoid Path.cwd() which triggers getcwd)
+                # This file is in backend/src/config/, so backend is 3 levels up
+                backend_dir = Path(__file__).parent.parent.parent
+                path = backend_dir / path
+            return path
         else:
             # Default: ../skills relative to backend directory
             from src.skills.loader import get_skills_root_path

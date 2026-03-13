@@ -823,12 +823,14 @@ class DeerFlowClient:
             PermissionError: If path traversal is detected.
         """
         uploads_dir = self._get_uploads_dir(thread_id)
-        file_path = (uploads_dir / filename).resolve()
+        file_path = uploads_dir / filename
 
-        try:
-            file_path.relative_to(uploads_dir.resolve())
-        except ValueError as exc:
-            raise PermissionError("Access denied: path traversal detected") from exc
+        # Path traversal check without resolve() (which triggers getcwd)
+        # Normalize paths and check with string comparison
+        file_str = os.path.normpath(str(file_path))
+        uploads_str = os.path.normpath(str(uploads_dir))
+        if not file_str.startswith(uploads_str + os.sep) and file_str != uploads_str:
+            raise PermissionError("Access denied: path traversal detected")
 
         if not file_path.is_file():
             raise FileNotFoundError(f"File not found: {filename}")
@@ -861,12 +863,14 @@ class DeerFlowClient:
 
         relative = clean_path[len(virtual_prefix) :].lstrip("/")
         base_dir = get_paths().sandbox_user_data_dir(thread_id)
-        actual = (base_dir / relative).resolve()
+        actual = base_dir / relative
 
-        try:
-            actual.relative_to(base_dir.resolve())
-        except ValueError as exc:
-            raise PermissionError("Access denied: path traversal detected") from exc
+        # Path traversal check without resolve() (which triggers getcwd)
+        actual_str = os.path.normpath(str(actual))
+        base_str = os.path.normpath(str(base_dir))
+        if not actual_str.startswith(base_str + os.sep) and actual_str != base_str:
+            raise PermissionError("Access denied: path traversal detected")
+
         if not actual.exists():
             raise FileNotFoundError(f"Artifact not found: {path}")
         if not actual.is_file():

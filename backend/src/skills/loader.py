@@ -5,6 +5,10 @@ from .parser import parse_skill_file
 from .types import Skill
 
 
+# Cache the skills root path at module load time to avoid blocking calls during request handling
+_CACHED_SKILLS_ROOT_PATH: Path | None = None
+
+
 def get_skills_root_path() -> Path:
     """
     Get the root path of the skills directory.
@@ -12,10 +16,16 @@ def get_skills_root_path() -> Path:
     Returns:
         Path to the skills directory (deer-flow/skills)
     """
+    global _CACHED_SKILLS_ROOT_PATH
+    if _CACHED_SKILLS_ROOT_PATH is not None:
+        return _CACHED_SKILLS_ROOT_PATH
+
     # backend directory is current file's parent's parent's parent
-    backend_dir = Path(__file__).resolve().parent.parent.parent
+    # Use parent instead of resolve() to avoid blocking os.getcwd() call
+    backend_dir = Path(__file__).parent.parent.parent
     # skills directory is sibling to backend directory
     skills_dir = backend_dir.parent / "skills"
+    _CACHED_SKILLS_ROOT_PATH = skills_dir
     return skills_dir
 
 

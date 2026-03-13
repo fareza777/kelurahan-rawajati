@@ -7,6 +7,42 @@ VIRTUAL_PATH_PREFIX = "/mnt/user-data"
 
 _SAFE_THREAD_ID_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
 
+# ============================================================================
+# Pre-compute paths at module load time (synchronously, before async context)
+# This is critical for Windows compatibility with LangGraph's blockbuster detection
+# ============================================================================
+
+# Cache these at import time - they won't change during runtime
+_CACHED_HOME: Path = Path.home()
+
+# Pre-compute the base directory at module load time
+def _compute_base_dir_at_import() -> Path:
+    """Compute base_dir synchronously at module import time.
+
+    This MUST happen at import time (sync context) to avoid blocking calls
+    in async context later.
+    """
+    # Priority 1: Environment variable
+    if env_home := os.getenv("DEER_FLOW_HOME"):
+        env_path = Path(env_home)
+        if env_path.is_absolute():
+            return env_path
+        return _CACHED_HOME / env_home
+
+    # Priority 2: Try to detect backend directory from __file__
+    # This file is at backend/src/config/paths.py
+    # backend is 3 levels up
+    backend_dir = Path(__file__).parent.parent.parent  # backend/
+    if (backend_dir / "pyproject.toml").exists():
+        return backend_dir / ".deer-flow"
+
+    # Priority 3: Fall back to home directory
+    return _CACHED_HOME / ".deer-flow"
+
+
+# Compute once at import time
+_CACHED_BASE_DIR: Path = _compute_base_dir_at_import()
+
 
 class Paths:
     """
@@ -28,30 +64,26 @@ class Paths:
                     ├── uploads/       <-- /mnt/user-data/uploads/
                     └── outputs/       <-- /mnt/user-data/outputs/
 
-    BaseDir resolution (in priority order):
-        1. Constructor argument `base_dir`
-        2. DEER_FLOW_HOME environment variable
-        3. Local dev fallback: cwd/.deer-flow  (when cwd is the backend/ dir)
-        4. Default: $HOME/.deer-flow
+    Note: All paths are pre-computed at module import time to avoid blocking
+    os.getcwd() calls in async context (Windows compatibility with LangGraph).
     """
 
     def __init__(self, base_dir: str | Path | None = None) -> None:
-        self._base_dir = Path(base_dir).resolve() if base_dir is not None else None
+        if base_dir is not None:
+            p = Path(base_dir)
+            if p.is_absolute():
+                self._base_dir = p
+            else:
+                # For relative paths, resolve against cached home
+                self._base_dir = _CACHED_HOME / base_dir
+        else:
+            # Use the pre-computed base directory
+            self._base_dir = _CACHED_BASE_DIR
 
     @property
     def base_dir(self) -> Path:
         """Root directory for all application data."""
-        if self._base_dir is not None:
-            return self._base_dir
-
-        if env_home := os.getenv("DEER_FLOW_HOME"):
-            return Path(env_home).resolve()
-
-        cwd = Path.cwd()
-        if cwd.name == "backend" or (cwd / "pyproject.toml").exists():
-            return cwd / ".deer-flow"
-
-        return Path.home() / ".deer-flow"
+        return self._base_dir
 
     @property
     def memory_file(self) -> Path:
@@ -154,15 +186,24 @@ class Paths:
             raise ValueError(f"Path must start with /{prefix}")
 
         relative = stripped[len(prefix) :].lstrip("/")
-        base = self.sandbox_user_data_dir(thread_id).resolve()
-        actual = (base / relative).resolve()
+        base = self.sandbox_user_data_dir(thread_id)
+        actual = base / relative
 
-        try:
-            actual.relative_to(base)
-        except ValueError:
+        # Normalize path without calling resolve()/abspath() which trigger getcwd()
+        # Use normpath which only normalizes . and .. without touching filesystem
+        actual_str = str(actual).replace("/", os.sep).replace("\\", os.sep)
+        base_str = str(base).replace("/", os.sep).replace("\\", os.sep)
+
+        # Remove any . or .. components
+        actual_normalized = os.path.normpath(actual_str)
+        base_normalized = os.path.normpath(base_str)
+
+        # Check for path traversal using string comparison on normalized paths
+        # The base should be a prefix of actual
+        if not actual_normalized.startswith(base_normalized + os.sep) and actual_normalized != base_normalized:
             raise ValueError("Access denied: path traversal detected")
 
-        return actual
+        return Path(actual_normalized)
 
 
 # ── Singleton ────────────────────────────────────────────────────────────
@@ -187,4 +228,6 @@ def resolve_path(path: str) -> Path:
     p = Path(path)
     if not p.is_absolute():
         p = get_paths().base_dir / path
-    return p.resolve()
+    # Don't call resolve() - it triggers getcwd()
+    # Just return the path as-is (it's already absolute or relative to base_dir)
+    return p
